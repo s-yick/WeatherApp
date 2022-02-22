@@ -1,19 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
 import {useState} from "react";
 
+
+
 const api = {
-  key: "159c29228a5532ad866ac2757103df83",
+  key: process.env.REACT_APP_WEATHER_KEY,
   base: "https://api.openweathermap.org/data/2.5/"
 }
+
+const date = new Date();
+var time = date.getHours()
+
+let currentClassName;
+
+if(time > 19 || time < 6){
+  currentClassName = "app night"
+}
+else if (time > 6 && time < 17){
+  currentClassName = "app day"
+}
+else{
+  currentClassName = "app evening"
+}
+
+
 function App() {
 
   const [query, setQuery] = useState('')
   const [weather, setWeather] = useState({})
 
-  const search = evt =>{
+  const search = event =>{
 
-    if(evt.key === "Enter"){
+    if(event.key === "Enter"){
       fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
           .then(res => res.json())
           .then(result =>{
@@ -41,7 +59,7 @@ function App() {
   }
 
   return (
-      <div className="app day">
+      <div className= {`app ${currentClassName}`}>
 
         <main>
 
@@ -79,7 +97,7 @@ function App() {
           <div className="weather-box">
 
             <div className={"temp"}>{Math.round(weather.main.temp)}°c</div>
-            <div className={"weather"}>Sunny</div>
+            <div className={"weather"}>{weather.weather[0].main}</div>
 
 
             </div>

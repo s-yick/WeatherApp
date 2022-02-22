@@ -70,11 +70,11 @@ main{
   border-radius: 0px 0px 16px 16px;
   margin-top: -25px;
 
-  box-shadow: 0px 5px rgba(0,0,0,0.2);
+  /*box-shadow: 0px 5px rgba(0,0,0,0.2);*/
 
   font-size: 20px;
 
-  transition: 0.4s ease;
+  transition: 0.4s ease-out;
 
 
 }
